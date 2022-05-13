@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/SchedulePage.css">
+</head>
+<body>
+  <nav>
+    <div class="nav_main">
+      <div class="nav_main_left">
+        <a href="#"><img src="img/logo.png" alt="Lakeside_logo" ></a>
+      </div>
+      <div class="nav_main_right">
+        <form action="index.html">
+          <button class="buttonLogin"><span>Return To Previous Page</span></button>
+        </form>
+      </div>
+    </div>
+  </nav>
+    <main>
+      <!-- display board left retrieve data from previous page-->
+    <div class="informationDispaly">
+      <img src="img/GolfRelated.jpg" width="50px" style="margin-left: 15px;">
+        <form id="survey-form">
+          <label id="name-label">Location</label>
+          <input type="text" class="form" value="Golfplace Inn" disabled><br>
+          <label id="name-label">Venue</label>
+          <input type="text" class="form" value="Similator One" disabled><br>
+          <label id="email-label">Player</label>
+          <input type="text" class="form" value="1" disabled ><br>
+          <label id="number-label">Duration</label>
+          <input type="select"  class="form"  id="duration" value ="" disabled><br><!---number-->
+        </form>
+      </div>
+       <!-- display board right , update data from previous page-->
+      <div class="informationupdate" >
+        <img src="img/sky.png" width="50px" style="margin-left: 15px;">
+          <form id="survey-form" action="./RegistrationForm.html">
+            <label id="number-label">Date</Select></label>
+            <input type="date" id="referenceDate" onchange="adjustdate()"class="form" required><br><!---number-->
+            <label id="name-label">Start Time</label>
+            <input type="text"   class="form" id="StartTime"><br>
+            <label id="name-label">End Time</label>
+            <input type="text" class="form" id="EndTime" value=""><br>
+            <input type="submit" class="form" value="submit"><br>
+          </form>
+        </div>
+      <div class="obscurebg">
+        <div class="contentFocus">
+          <div class="headerText">
+            <h1>Schedule Appointment</h1>
+          </div>
+          <div class="dynamicCalender" id="dynmaicCalendar">
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div>
+          <a href="#!" class="text-white me-4">Copyright © 2020. All rights reserved.</a>
+      </div>
+      <div>
+          <a href="https://www.windanginns.com.au/terms-conditions/!" class="text-white me-4"> Terms & Conditions</a>
+      </div>
+      <div>
+        <a href="http://dsensedesign.com/windanginns/wp-content/uploads/2020/09/WINDANGINNS_Covid19-outlines.pdf" class="text-white me-4">Covid-19 policy</a>
+      </div>
+      <div>
+        Site By : <a href="https://www.linkedin.com/in/chencan-wang/">Barry Wang</a>
+      </div>
+    </footer>
+   <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>WARNING</h1>
+        </div>
+        <div class="modal-body">
+          <h3>You are going to reset the Game Times</h3>
+          <button onclick="closePopup()">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <script src="js/schedule.js"> </script>
+</body>
+</html>

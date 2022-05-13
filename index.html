@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GolFSimultorSchedule</title>
+  <link rel="stylesheet" href="./css/ThemeCSS.css">
+</head>
+<body>
+  <nav>
+    <div class="nav_main">
+      <div class="nav_main_left">
+        <a href="#"><img src="img/logo.png" alt="Lakeside_logo" ></a>
+      </div>
+      <div class="nav_main_right">
+        <form action="Login.html">
+          <button class="buttonLogin">STAFF</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <header>
+      <div><a href="https://www.windanginns.com.au/">
+        Hotel 
+        Accommdation</a></div>
+      <div><a href="#">Restaurant</a></div> 
+      <div><a href="#">Event</a></div>
+      <div><a href="#">Contact us</a></div>
+  </header>
+    <main>
+        <div class="obscurebg">
+          <div class="centerCotent">
+            <div class="headerTitle">Book A Game Now</div>
+            <div class="InputForm">
+              <label>VENUE</label>
+              <select class="VENUE_one" name="VENUE" id="VENUE">
+                <option value="1">Golfplace Inn : Simulator One</option>
+                <option value="2">Golfplace Inn : Simulator Two</option>
+              </select>
+              <div class="divider">
+                <div>
+                  <label>PLAYERS</label>
+                  <select class="player"name="" id="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+                <div class="leftPart">
+                  <label>DURATION</label>
+                  <span class="hovertext" data-hover="maximum duration is 3 hours per reservation">
+                  <select class="DURATION" name="" id="">
+                    <option value="1">30 mins</option>
+                    <option value="2">60 mins</option>
+                    <option value="3">90 mins</option>
+                    <option value="4">120 mins</option>
+                    <option value="5">150 mins</option>
+                    <option value="5">180 mins</option>
+                  </select>
+                </span>
+                </div>
+              </div>
+              <div class="DateDiv">
+                <label>DATE</label>
+                <input class="DatePicker"type="date" id="Pick_a_date" onchange="CalenderValueUpdate()">
+              </div>
+              <a href="./schedule.html">
+                <button id="submit_Information" onclick="locationStorageAdd()" class="submit_Information">Schedule My Reservation</button>
+             </a>
+            </div>
+          </div>
+        </div>
+    </main>
+    <footer>
+      <div>
+          <a href="#!" class="text-white me-4">Copyright © 2020. All rights reserved.</a>
+      </div>
+      <div>
+          <a href="https://www.windanginns.com.au/terms-conditions/!" class="text-white me-4"> Terms & Conditions</a>
+      </div>
+      <div>
+        <a href="http://dsensedesign.com/windanginns/wp-content/uploads/2020/09/WINDANGINNS_Covid19-outlines.pdf" class="text-white me-4">Covid-19 policy</a>
+      </div>
+      <div>
+        Site By : <a href="https://www.linkedin.com/in/chencan-wang/">Barry Wang</a>
+      </div>
+    </footer>
+    <script src="js/indexRender.js"> </script>
+</body>
+</html>
