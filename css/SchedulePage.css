@@ -146,6 +146,7 @@ main
   font-size: 16px;
   text-transform: uppercase;
   font-family: Avenir-Heavy,PingFang SC,Helvetica Neue,Arial,sans-serif;
+  pointer-events: none;
 }
 
 
@@ -157,6 +158,7 @@ main
   font-weight: 400;
   font-size: 15px;
   box-sizing: border-box;
+  pointer-events: none;
 
 }
 
@@ -187,7 +189,7 @@ main
   margin-bottom: 1em;
 }
 
-.form input
+.form input, .form select
 {
     text-align: center;
 }
@@ -346,3 +348,33 @@ footer>div{
   color: white;
 }
 
+
+
+/* tip box */
+.hovertext {
+  position: relative;
+
+}
+
+.hovertext:before {
+  content: attr(data-hover);
+  visibility: hidden;
+  opacity: 0;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: opacity 1s ease-in-out;
+
+  position: absolute;
+  z-index: 300;
+  right:120%;
+  top: 30%;;
+}
+
+.hovertext:hover:before {
+  opacity: 1;
+  visibility: visible;
+}

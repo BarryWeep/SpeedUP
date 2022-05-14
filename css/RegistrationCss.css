@@ -42,16 +42,16 @@ a{
   font-size: 16px;
   transition-duration: 0.4s;
   cursor: pointer;
-  background-color: white; 
+  background-color:#62529c; 
   color: black; 
   border: 2px solid #008CBA;
+  color: white;
   font-weight: bold;
   margin-right: 40px;
 }
 
 .buttonLogin:hover {
   background-color: #008CBA;
-  color: white;
   justify-content:center;
 }
 
