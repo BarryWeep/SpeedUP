@@ -41,17 +41,19 @@
           <form id="survey-form" action="./RegistrationForm.html">
             <label id="number-label">Date</Select></label>
             <input type="date" id="referenceDate" onchange="adjustdate()"class="form" required><br><!---number-->
-            <span class="hovertext" data-hover="Click on the table to pick start and end Times">
+            <span class="hovertext" data-hover="Click on the table to pick Start and End Times">
               <label id="name-label">Start Time</label>
-              <select class="form startTimeSelect" id="startTimeSelect" disabled required>
+              <select class="form startTimeSelect" id="startTimeSelect" disabled>
                 <option value="" selected></option>
               </select>
               <label id="name-label">End Time</label>
-              <select class="form EndTimeSelect" id="EndTimeSelect" disabled required>
+              <select class="form EndTimeSelect" id="EndTimeSelect" disabled>
                 <option value="" selected></option>
               </select>
             </span>
-            <input type="submit" class="form" value="submit" ><br>
+            <input type="checkbox" id="checkInput" required>
+            <label style="font-size: 15px;"> Comfirm</label><br><br>
+            <input type="submit" class="form" value="submit"><br>
           </form>
         </div>
       <div class="obscurebg">

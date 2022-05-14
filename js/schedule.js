@@ -123,6 +123,9 @@ let compaireTwoValue = [];
 let startEndCounter = 0;
 
 
+let PreDate = 0;
+let PostDate = 0;
+let currentDate=0;
 
 function RetrieveDataLocalStorage()
 {
@@ -184,11 +187,11 @@ function renderTheList()
     let DayParameter=GetWeekDate();
     // render the list
     // date inital
-    let PreDate = 0;
-    let PostDate = 0;
+    PreDate = 0;
+    PostDate = 0;
 
     //get the date
-    let currentDate = document.getElementById("referenceDate").value;
+    currentDate = document.getElementById("referenceDate").value;
     let dt = new Date(currentDate);
     let day = dt.getDate();
     let month = dt.getMonth() + 1;
@@ -284,6 +287,7 @@ function sub_renderTheTime()
           bodydiv.style.borderBottom ="1px ridge";
           bodydiv.style.cursor ="pointer";
           bodydiv.classList.add("ColCal");
+          bodydiv.classList.add("col-one");
           bodydiv.style.pointerEvents='auto';
           //bodydiv.onclick = function(){showUp()};
     
@@ -319,6 +323,7 @@ function sub_renderTheTime()
           bodydiv.style.borderBottom ="1px ridge";
           bodydiv.style.cursor ="pointer";
           bodydiv.classList.add("ColCal");
+          bodydiv.classList.add("col-two");
           bodydiv.style.pointerEvents='auto';
           //bodydiv.onclick = function(){showUp()};
     
@@ -343,6 +348,7 @@ function sub_renderTheTime()
           bodydiv.style.borderBottom ="1px ridge";
           bodydiv.style.cursor ="pointer";
           bodydiv.classList.add("ColCal");
+          bodydiv.classList.add("col-three");
           bodydiv.style.pointerEvents='auto';
           //bodydiv.onclick = function(){showUp()};
     
@@ -466,12 +472,17 @@ function showPopup()
 /// click to change the start time and end time display 
 
 const theTimeTable = document.querySelector(".dynamicCalender");
-
+let previous_click;
 //const  theTimeTable = document.getElementById(".dynamicCalender").querySelectorAll(".ColCal");
 theTimeTable.addEventListener('click', e=> {
 
   if(e.target.matches('.ColCal'))
   {
+     
+    let caseOne = {"0":"ColCal","1":"col-one"};
+    let caseTwo = {"0":"ColCal","1":"col-two"};
+    let caseThree = {"0":"ColCal","1":"col-three"};
+
       if(startEndCounter==0) // start time 
       { 
         document.getElementById("startTimeSelect").value=e.target.innerHTML;
@@ -481,12 +492,153 @@ theTimeTable.addEventListener('click', e=> {
         e.target.style.backgroundRepeat = "no-repeat";
         e.target.style.backgroundColor="rgba(0,0,0,0.2)";
         //------------------
-          
+          previous_click = e.target;
           inputStartEndValue[0] = e.target.innerHTML;
           startEndCounter++;
+          if(JSON.stringify(e.target.classList)==JSON.stringify(caseOne))
+          { 
+            document.getElementById("referenceDate").value = PreDate;
+          }
+          else if(JSON.stringify(e.target.classList)==JSON.stringify(caseTwo))
+          {
+            document.getElementById("referenceDate").value = currentDate;
+          }
+          else if(JSON.stringify(e.target.classList)==JSON.stringify(caseThree))
+          {
+            document.getElementById("referenceDate").value = PostDate;
+          }
+          //document.getElementById("referenceDate").value = 
       }
       else if(startEndCounter==1)  // end time
       { 
+          if(JSON.stringify(e.target.classList)!==JSON.stringify(previous_click.classList)) 
+          {
+            alert("You can not pick start time and end time in different days");
+            startEndCounter=0;
+            document.getElementById('dynmaicCalendar').innerHTML="";
+            document.getElementById('startTimeSelect').value="";
+            document.getElementById('EndTimeSelect').value="";
+            renderTheList();
+            return;
+          }
+          else if(intervals_Time.indexOf(inputStartEndValue[0])>= intervals_Time.indexOf(e.target.innerHTML))
+          {
+            alert("Dude, the Start time should be later  than or euqual to End time, relativity theory,huh !!!");
+            startEndCounter=0;
+            document.getElementById('dynmaicCalendar').innerHTML="";
+            document.getElementById('startTimeSelect').value="";
+            document.getElementById('EndTimeSelect').value="";
+            renderTheList();
+            return;
+
+          }
+          
+
+          /*************************************************** */
+
+
+        /* no use
+          let range = new Range();
+
+          range.setStartBefore(previous_click,0);
+          range.setEndBefore(e.target,0);
+
+           alert(range);
+        */
+           let bookedPeried = [];
+           let ReservedBookedPEried=[];
+
+
+           for(let counter = intervals_Time.indexOf(previous_click.innerHTML);counter<=intervals_Time.indexOf(e.target.innerHTML);counter++)
+           {  
+              bookedPeried.push(counter);
+           }
+
+          if(JSON.stringify(e.target.classList)==JSON.stringify(caseOne))
+          { 
+            ReservedBookedPEried=[];
+            for(let a = 0; a < existingUser_yesterday.length; a++)
+            {
+                for(let b=intervals_Time.indexOf(existingUser_yesterday[a].StartTime); b<=intervals_Time.indexOf(existingUser_yesterday[a].EndTime); b++)
+                {
+                  ReservedBookedPEried[b]=b;
+                }
+            }
+            const output = ReservedBookedPEried.filter(function (obj) 
+            {
+              return bookedPeried.indexOf(obj) !== -1;
+            });
+
+
+
+            if(output.length>2)
+            {
+              alert("Invalid Input, the Period u picked has been booked,plz try again");
+              startEndCounter=0;
+              document.getElementById('dynmaicCalendar').innerHTML="";
+              document.getElementById('startTimeSelect').value="";
+              document.getElementById('EndTimeSelect').value="";
+              renderTheList();
+              return;
+            }
+
+          }
+          else if(JSON.stringify(e.target.classList)==JSON.stringify(caseTwo))
+          { 
+            ReservedBookedPEried=[];
+            for(let a = 0; a < existingUser_yesterday.length; a++)
+            {
+                for(let b=intervals_Time.indexOf(existingUser_yesterday[a].StartTime); b<=intervals_Time.indexOf(existingUser_yesterday[a].EndTime); b++)
+                {
+                  ReservedBookedPEried[b]=b;
+                }
+            }
+            const output = ReservedBookedPEried.filter(function (obj) 
+            {
+              return bookedPeried.indexOf(obj) !== -1;
+            });
+            if(output.length>2)
+            {
+              alert("Invalid Input, the Period u picked has been booked,plz try again");
+              startEndCounter=0;
+              document.getElementById('dynmaicCalendar').innerHTML="";
+              document.getElementById('startTimeSelect').value="";
+              document.getElementById('EndTimeSelect').value="";
+              renderTheList();
+              return;
+            }
+
+          }
+          else if(JSON.stringify(e.target.classList)==JSON.stringify(caseThree))
+          { 
+            ReservedBookedPEried=[];
+            for(let a = 0; a < existingUser_yesterday.length; a++)
+            {
+                for(let b=intervals_Time.indexOf(existingUser_yesterday[a].StartTime); b<=intervals_Time.indexOf(existingUser_yesterday[a].EndTime); b++)
+                {
+                  ReservedBookedPEried[b]=b;
+                }
+            }
+            const output = ReservedBookedPEried.filter(function (obj) 
+            {
+              return bookedPeried.indexOf(obj) !== -1;
+            });
+
+
+            if(output.length>2)
+            {
+              alert("Invalid Input, the Period u picked has been booked,plz try again");
+              startEndCounter=0;
+              document.getElementById('dynmaicCalendar').innerHTML="";
+              document.getElementById('startTimeSelect').value="";
+              document.getElementById('EndTimeSelect').value="";
+              renderTheList();
+              return;
+            }
+
+          }
+
+          /*************************************************** */
            document.getElementById("EndTimeSelect").value=e.target.innerHTML;
            let selId = document.getElementById("startTimeSelect");
            let items = selId.options;//Javascript get select all option
@@ -517,6 +669,18 @@ theTimeTable.addEventListener('click', e=> {
               else
               { 
                   let durationValue = (compaireTwoValue[1]-compaireTwoValue[0])*30;
+                  if(durationValue>180)
+                  {
+                    alert("Maximum duration is 3 hours per reservation");
+                    startEndCounter=0;
+                    document.getElementById('dynmaicCalendar').innerHTML="";
+                    document.getElementById('startTimeSelect').value="";
+                    document.getElementById('EndTimeSelect').value="";
+                    compaireTwoValue=[];
+                    renderTheList();
+                    return;
+                  }
+                
                   let Stringvalue =  durationValue.toString() + " mins";
                   document.getElementById("duration").value = Stringvalue;
                   compaireTwoValue=[];
@@ -525,6 +689,7 @@ theTimeTable.addEventListener('click', e=> {
       }
       else
       {   // third time click
+        previous_click="";
         showPopup();
         startEndCounter=0;
       }
@@ -532,8 +697,6 @@ theTimeTable.addEventListener('click', e=> {
 
 
 });
-
-
 
 
 function adjustdate()
